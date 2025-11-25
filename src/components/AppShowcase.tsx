@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Star, Download, Bell, X, Smartphone } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "./ui/dialog";
 import { Badge } from "./ui/badge";

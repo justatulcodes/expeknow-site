@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 import { ArrowRight, FileText, Github, Linkedin } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 interface HeroProps {
   onNavigate: (page: string) => void;
