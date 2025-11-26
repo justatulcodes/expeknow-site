@@ -62,9 +62,6 @@ export function RequestForm() {
 
   return (
     <section className="py-20 relative overflow-hidden bg-black" id="request">
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-96 h-96 opacity-[0.02]">
-        <HelpCircle className="w-full h-full" strokeWidth={3} />
-      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
@@ -74,11 +71,11 @@ export function RequestForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="space-y-6">
-              <div className="inline-block p-3 bg-neutral-900 rounded-2xl">
-                <HelpCircle className="w-12 h-12 text-white" />
+            <div className="space-y-6 relative">
+              <div className="absolute -left-32 md:-left-48 top-0 w-[600px] h-[600px] opacity-[0.03] pointer-events-none">
+                <HelpCircle className="w-full h-full text-white" strokeWidth={4} />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white relative z-10">
                 Have a Crazy Idea?
               </h2>
               <p className="text-neutral-400 text-lg leading-relaxed">

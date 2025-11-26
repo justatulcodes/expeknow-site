@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Star } from "lucide-react";
+import { Star, Smartphone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -102,9 +102,7 @@ export function AppShowcase({ onAppSelect }: AppShowcaseProps) {
   const categories: Category[] = ["All", "Career", "Client", "Learning", "In-Dev"];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background via-muted/10 to-background relative overflow-hidden" id="apps">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-muted/20 via-transparent to-transparent" />
-
+    <section className="py-20 bg-black relative overflow-hidden" id="apps">
       <div className="container mx-auto px-4 relative">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
@@ -112,9 +110,12 @@ export function AppShowcase({ onAppSelect }: AppShowcaseProps) {
           viewport={{ once: true }}
           className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6"
         >
-          <div>
-            <h2 className="text-4xl font-bold tracking-tight mb-2">Featured Apps</h2>
-            <p className="text-muted-foreground text-lg">Explore my portfolio of applications.</p>
+          <div className="relative">
+            <div className="absolute -left-32 md:-left-48 top-0 w-[600px] h-[600px] opacity-[0.03] pointer-events-none">
+              <Smartphone className="w-full h-full text-white" strokeWidth={4} />
+            </div>
+            <h2 className="text-4xl font-bold tracking-tight mb-2 text-white relative z-10">Featured Apps</h2>
+            <p className="text-neutral-400 text-lg relative z-10">Explore my portfolio of applications.</p>
           </div>
 
           <div className="flex gap-2 flex-wrap justify-center">
@@ -142,7 +143,7 @@ export function AppShowcase({ onAppSelect }: AppShowcaseProps) {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 onClick={() => onAppSelect?.(app)}
-                className="group cursor-pointer bg-card/50 backdrop-blur rounded-2xl border hover:shadow-xl hover:border-accent transition-all duration-300 overflow-hidden hover:-translate-y-2"
+                className="group cursor-pointer bg-neutral-900/50 backdrop-blur rounded-2xl border border-neutral-800 hover:shadow-xl hover:border-neutral-700 transition-all duration-300 overflow-hidden hover:-translate-y-2"
               >
                 <div className="flex p-5 gap-4 items-start">
                   <div className="relative h-20 w-20 rounded-2xl overflow-hidden bg-muted/50 shrink-0 ring-2 ring-border">
@@ -153,10 +154,10 @@ export function AppShowcase({ onAppSelect }: AppShowcaseProps) {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-lg truncate group-hover:text-primary transition-colors">{app.title}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-2 mb-2">{app.description}</p>
+                    <h3 className="font-bold text-lg truncate text-white group-hover:text-neutral-300 transition-colors">{app.title}</h3>
+                    <p className="text-sm text-neutral-400 line-clamp-2 mb-2">{app.description}</p>
 
-                    <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-2 mt-2 text-xs text-neutral-400">
                       <span className="flex items-center gap-1">
                         {app.status === 'live' ? (
                           <>
@@ -164,13 +165,13 @@ export function AppShowcase({ onAppSelect }: AppShowcaseProps) {
                             <span className="font-medium">{app.rating}</span>
                           </>
                         ) : (
-                          <Badge variant="secondary" className="text-[10px] h-5 font-semibold">
+                          <Badge variant="secondary" className="text-[10px] h-5 font-semibold bg-neutral-800 text-neutral-300 border-neutral-700 rounded-full">
                             {app.developmentProgress}% Complete
                           </Badge>
                         )}
                       </span>
                       <span>•</span>
-                      <span className="font-medium">{app.category}</span>
+                      <Badge variant="secondary" className="text-[10px] h-5 font-semibold bg-neutral-800 text-neutral-300 border-neutral-700 rounded-full">{app.category}</Badge>
                     </div>
                   </div>
                 </div>

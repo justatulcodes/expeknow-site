@@ -60,10 +60,6 @@ interface BlogSectionProps {
 export function BlogSection({ onBlogSelect }: BlogSectionProps) {
   return (
     <section className="py-20 bg-black relative overflow-hidden" id="blog">
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-[0.02]">
-        <Lightbulb className="w-full h-full" strokeWidth={3} />
-      </div>
-
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
@@ -71,14 +67,12 @@ export function BlogSection({ onBlogSelect }: BlogSectionProps) {
           viewport={{ once: true }}
           className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6"
         >
-          <div className="text-center md:text-left">
-            <div className="inline-flex items-center gap-3 mb-4">
-              <div className="p-2 bg-neutral-900 rounded-xl">
-                <Lightbulb className="w-8 h-8 text-white" />
-              </div>
+          <div className="text-center md:text-left relative">
+            <div className="absolute -right-32 md:-right-48 top-0 w-[600px] h-[600px] opacity-[0.03] pointer-events-none">
+              <Lightbulb className="w-full h-full text-white" strokeWidth={4} />
             </div>
-            <h2 className="text-4xl font-bold tracking-tight mb-2 text-white">Latest Thoughts</h2>
-            <p className="text-neutral-400 text-lg">Insights on development, design, and technology.</p>
+            <h2 className="text-4xl font-bold tracking-tight mb-2 text-white relative z-10">Latest Thoughts</h2>
+            <p className="text-neutral-400 text-lg relative z-10">Insights on development, design, and technology.</p>
           </div>
           <Button variant="outline" className="rounded-full gap-2 hover:gap-3 transition-all border-neutral-700 text-white hover:bg-neutral-900">
             View all posts
