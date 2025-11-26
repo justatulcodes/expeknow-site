@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Download, Star } from "lucide-react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
@@ -17,40 +16,22 @@ export function ForYouSection({ apps, onAppSelect }: ForYouSectionProps) {
 
   const liveApps = apps.filter(app => app.status === "live");
 
-  const motionProps = isMobile ? {} : {
-    initial: { y: 20, opacity: 0 },
-    whileInView: { y: 0, opacity: 1 },
-    viewport: { once: true }
-  };
-
   return (
     <section className="py-12 md:py-20 bg-black relative overflow-hidden" id="for-you">
       <div className="container mx-auto px-4 relative">
-        <motion.div
-          {...motionProps}
-          className="text-center mb-8 md:mb-12"
-        >
+        <div className="text-center mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-2 text-white">
             For You
           </h2>
           <p className="text-neutral-400 text-sm md:text-lg">
             Apps ready for download
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {liveApps.map((app, index) => {
-            const cardMotionProps = isMobile ? {} : {
-              initial: { opacity: 0, y: 20 },
-              whileInView: { opacity: 1, y: 0 },
-              viewport: { once: true },
-              transition: { duration: 0.3, delay: index * 0.1 }
-            };
-
-            return (
-              <motion.div
+          {liveApps.map((app, index) => (
+              <div
                 key={app.id}
-                {...cardMotionProps}
                 onClick={() => onAppSelect?.(app)}
               >
                 <Card className="group cursor-pointer bg-neutral-900/50 backdrop-blur rounded-2xl border border-neutral-800 hover:shadow-xl hover:border-neutral-700 transition-all duration-300 overflow-hidden hover:-translate-y-2">
@@ -95,9 +76,8 @@ export function ForYouSection({ apps, onAppSelect }: ForYouSectionProps) {
                     </Button>
                   </div>
                 </Card>
-              </motion.div>
-            );
-          })}
+              </div>
+            ))}
         </div>
       </div>
     </section>
