@@ -72,7 +72,7 @@ export function RequestForm() {
             transition={{ duration: 0.6 }}
           >
             <div className="space-y-6 relative">
-              <div className="absolute -right-32 md:-right-48 -top-12 w-[600px] h-[600px] opacity-[0.08] pointer-events-none">
+              <div className="absolute -right-32 md:-right-48 -top-12 w-[510px] h-[510px] opacity-[0.15] pointer-events-none">
                 <HelpCircle className="w-full h-full text-white" strokeWidth={4} />
               </div>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white relative z-10">

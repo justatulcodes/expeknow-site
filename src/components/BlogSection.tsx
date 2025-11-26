@@ -5,6 +5,8 @@ import { Lightbulb, Clock, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { BlogData } from "./BlogDetailView";
 
+export type { BlogData };
+
 export const BLOGS: BlogData[] = [
   {
     id: 1,
@@ -55,9 +57,10 @@ By the end of this article, you'll have a clear roadmap for taking your app from
 
 interface BlogSectionProps {
   onBlogSelect?: (blog: BlogData) => void;
+  onViewAll?: () => void;
 }
 
-export function BlogSection({ onBlogSelect }: BlogSectionProps) {
+export function BlogSection({ onBlogSelect, onViewAll }: BlogSectionProps) {
   return (
     <section className="py-20 bg-black relative overflow-hidden" id="blog">
       <div className="container mx-auto px-4 relative z-10">
@@ -68,13 +71,13 @@ export function BlogSection({ onBlogSelect }: BlogSectionProps) {
           className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6"
         >
           <div className="text-center md:text-left relative">
-            <div className="absolute -left-32 md:-left-48 -top-12 w-[600px] h-[600px] opacity-[0.08] pointer-events-none">
+            <div className="absolute -left-32 md:-left-48 -top-12 w-[510px] h-[510px] opacity-[0.15] pointer-events-none">
               <Lightbulb className="w-full h-full text-white" strokeWidth={4} />
             </div>
             <h2 className="text-4xl font-bold tracking-tight mb-2 text-white relative z-10">Latest Thoughts</h2>
             <p className="text-neutral-400 text-lg relative z-10">Insights on development, design, and technology.</p>
           </div>
-          <Button variant="outline" className="rounded-full gap-2 hover:gap-3 transition-all border-neutral-700 text-white hover:bg-neutral-900">
+          <Button variant="outline" onClick={onViewAll} className="rounded-full gap-2 hover:gap-3 transition-all border-neutral-700 text-white hover:bg-neutral-900">
             View all posts
             <ArrowRight className="h-4 w-4" />
           </Button>

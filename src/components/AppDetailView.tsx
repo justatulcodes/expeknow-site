@@ -47,9 +47,9 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-background"
+      className="min-h-screen bg-black"
     >
-      <div className="relative h-[50vh] w-full bg-gradient-to-br from-muted/50 to-background overflow-hidden">
+      <div className="relative h-[50vh] w-full bg-gradient-to-br from-neutral-900/50 to-black overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <ImageWithFallback
             src={app.image}
@@ -57,13 +57,13 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black" />
 
         <div className="container mx-auto px-4 h-full relative">
           <Button
             variant="ghost"
             onClick={onBack}
-            className="mt-8 hover:bg-accent"
+            className="mt-8 hover:bg-neutral-900 text-white"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Apps
@@ -75,7 +75,7 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="h-32 w-32 rounded-3xl overflow-hidden bg-card shadow-2xl border-4 border-background"
+                className="h-32 w-32 rounded-3xl overflow-hidden bg-neutral-900 shadow-2xl border-4 border-black"
               >
                 <ImageWithFallback
                   src={app.image}
@@ -90,11 +90,11 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.3 }}
                 >
-                  <h1 className="text-4xl md:text-5xl font-bold mb-2">{app.title}</h1>
-                  <p className="text-muted-foreground text-lg mb-4">{app.description}</p>
+                  <h1 className="text-4xl md:text-5xl font-bold mb-2 text-white">{app.title}</h1>
+                  <p className="text-neutral-400 text-lg mb-4">{app.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {app.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-sm">
+                      <Badge key={tag} variant="secondary" className="text-sm bg-neutral-800 text-neutral-300 border-neutral-700 rounded-full">
                         {tag}
                       </Badge>
                     ))}
@@ -110,7 +110,7 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
               >
                 {app.status === "live" ? (
                   <>
-                    <Button size="lg" className="rounded-full h-12 px-8" onClick={handleDownload}>
+                    <Button size="lg" className="rounded-full h-12 px-8 bg-green-600 hover:bg-green-700 text-white" onClick={handleDownload}>
                       <Download className="mr-2 h-5 w-5" />
                       Download
                     </Button>
@@ -118,7 +118,7 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
                       <Button
                         size="lg"
                         variant="outline"
-                        className="rounded-full h-12 px-8"
+                        className="rounded-full h-12 px-8 border-neutral-700 text-white hover:bg-neutral-900"
                         onClick={() => window.open(app.repoUrl, '_blank')}
                       >
                         <Github className="mr-2 h-5 w-5" />
@@ -127,7 +127,7 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
                     )}
                   </>
                 ) : (
-                  <Button size="lg" className="rounded-full h-12 px-8" onClick={handleNotify}>
+                  <Button size="lg" className="rounded-full h-12 px-8 bg-blue-600 hover:bg-blue-700 text-white" onClick={handleNotify}>
                     <Bell className="mr-2 h-5 w-5" />
                     Notify Me
                   </Button>
@@ -147,28 +147,28 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
             className="lg:col-span-2 space-y-8"
           >
             {app.status === "in-dev" && app.developmentProgress !== undefined && (
-              <div className="bg-card rounded-2xl p-6 border animate-slide-up">
-                <h3 className="text-xl font-semibold mb-4">Development Progress</h3>
+              <div className="bg-neutral-900/50 rounded-2xl p-6 border border-neutral-800 animate-slide-up">
+                <h3 className="text-xl font-semibold mb-4 text-white">Development Progress</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Current Phase: {app.developmentPhase}</span>
-                    <span className="font-semibold">{app.developmentProgress}%</span>
+                    <span className="text-neutral-400">Current Phase: {app.developmentPhase}</span>
+                    <span className="font-semibold text-white">{app.developmentProgress}%</span>
                   </div>
                   <Progress value={app.developmentProgress} className="h-3" />
                 </div>
               </div>
             )}
 
-            <div className="bg-card rounded-2xl p-6 border">
-              <h3 className="text-xl font-semibold mb-4">About this app</h3>
-              <p className="text-muted-foreground leading-relaxed">
+            <div className="bg-neutral-900/50 rounded-2xl p-6 border border-neutral-800">
+              <h3 className="text-xl font-semibold mb-4 text-white">About this app</h3>
+              <p className="text-neutral-400 leading-relaxed">
                 {app.longDescription}
               </p>
             </div>
 
             {app.screenshots.length > 0 && (
-              <div className="bg-card rounded-2xl p-6 border">
-                <h3 className="text-xl font-semibold mb-4">Screenshots</h3>
+              <div className="bg-neutral-900/50 rounded-2xl p-6 border border-neutral-800">
+                <h3 className="text-xl font-semibold mb-4 text-white">Screenshots</h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {app.screenshots.map((shot, i) => (
                     <motion.div
@@ -176,7 +176,7 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ delay: 0.6 + i * 0.1 }}
-                      className="aspect-video rounded-lg overflow-hidden bg-muted border cursor-pointer hover:scale-105 transition-transform"
+                      className="aspect-video rounded-lg overflow-hidden bg-neutral-900 border border-neutral-800 cursor-pointer hover:scale-105 transition-transform"
                     >
                       <ImageWithFallback
                         src={shot}
@@ -196,31 +196,31 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
             transition={{ delay: 0.6 }}
             className="space-y-6"
           >
-            <div className="bg-card rounded-2xl p-6 border">
-              <h3 className="text-xl font-semibold mb-6">Statistics</h3>
+            <div className="bg-neutral-900/50 rounded-2xl p-6 border border-neutral-800">
+              <h3 className="text-xl font-semibold mb-6 text-white">Statistics</h3>
               <div className="space-y-4">
                 {app.status === "live" && (
                   <>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Rating</span>
-                      <div className="flex items-center gap-1 font-bold">
+                      <span className="text-neutral-400">Rating</span>
+                      <div className="flex items-center gap-1 font-bold text-white">
                         {app.rating}
-                        <Star className="h-4 w-4 fill-current" />
+                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Downloads</span>
-                      <span className="font-bold">{app.downloads}</span>
+                      <span className="text-neutral-400">Downloads</span>
+                      <span className="font-bold text-white">{app.downloads}</span>
                     </div>
                   </>
                 )}
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Category</span>
-                  <Badge variant="outline">{app.category}</Badge>
+                  <span className="text-neutral-400">Category</span>
+                  <Badge variant="outline" className="border-neutral-700 text-neutral-300">{app.category}</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Status</span>
-                  <Badge variant={app.status === "live" ? "default" : "secondary"}>
+                  <span className="text-neutral-400">Status</span>
+                  <Badge variant={app.status === "live" ? "default" : "secondary"} className={app.status === "live" ? "bg-green-600 text-white" : "bg-blue-600 text-white"}>
                     {app.status === "live" ? "Live" : "In Development"}
                   </Badge>
                 </div>
@@ -228,12 +228,12 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
             </div>
 
             {app.repoUrl && (
-              <div className="bg-card rounded-2xl p-6 border">
-                <h3 className="text-xl font-semibold mb-4">Links</h3>
+              <div className="bg-neutral-900/50 rounded-2xl p-6 border border-neutral-800">
+                <h3 className="text-xl font-semibold mb-4 text-white">Links</h3>
                 <div className="space-y-3">
                   <Button
                     variant="outline"
-                    className="w-full justify-start"
+                    className="w-full justify-start border-neutral-700 text-white hover:bg-neutral-900"
                     onClick={() => window.open(app.repoUrl, '_blank')}
                   >
                     <Github className="mr-2 h-4 w-4" />
@@ -243,7 +243,7 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
                   {app.downloadUrl && app.status === "live" && (
                     <Button
                       variant="outline"
-                      className="w-full justify-start"
+                      className="w-full justify-start border-neutral-700 text-white hover:bg-neutral-900"
                       onClick={handleDownload}
                     >
                       <Download className="mr-2 h-4 w-4" />
