@@ -61,9 +61,9 @@ export function RequestForm() {
   }
 
   return (
-    <section className="py-20 relative overflow-hidden bg-gradient-to-br from-background via-muted/5 to-background" id="request">
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-96 h-96 opacity-5">
-        <HelpCircle className="w-full h-full" strokeWidth={1} />
+    <section className="py-20 relative overflow-hidden bg-black" id="request">
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-96 h-96 opacity-[0.02]">
+        <HelpCircle className="w-full h-full" strokeWidth={3} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -75,28 +75,28 @@ export function RequestForm() {
             transition={{ duration: 0.6 }}
           >
             <div className="space-y-6">
-              <div className="inline-block p-3 bg-primary/10 rounded-2xl">
-                <HelpCircle className="w-12 h-12 text-primary" />
+              <div className="inline-block p-3 bg-neutral-900 rounded-2xl">
+                <HelpCircle className="w-12 h-12 text-white" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
                 Have a Crazy Idea?
               </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed">
+              <p className="text-neutral-400 text-lg leading-relaxed">
                 I'm always looking for interesting projects to work on. Share your wildest app idea,
                 and if it catches my attention, I might just bring it to life.
               </p>
               <div className="space-y-3 pt-4">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-                  <p className="text-muted-foreground">Innovative concepts welcome</p>
+                  <p className="text-neutral-400">Innovative concepts welcome</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-                  <p className="text-muted-foreground">Quick turnaround on feedback</p>
+                  <p className="text-neutral-400">Quick turnaround on feedback</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-                  <p className="text-muted-foreground">Collaborative development process</p>
+                  <p className="text-neutral-400">Collaborative development process</p>
                 </div>
               </div>
             </div>
@@ -107,7 +107,7 @@ export function RequestForm() {
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-card/50 backdrop-blur border rounded-3xl p-8 shadow-xl"
+            className="bg-neutral-900/50 backdrop-blur border border-neutral-800 rounded-3xl p-8 shadow-xl"
           >
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

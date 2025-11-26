@@ -5,6 +5,7 @@ import { AppShowcase } from "./components/AppShowcase";
 import { AppDetailView, AppData } from "./components/AppDetailView";
 import { RequestForm } from "./components/RequestForm";
 import { BlogSection } from "./components/BlogSection";
+import { BlogDetailView, BlogData } from "./components/BlogDetailView";
 import { AboutView } from "./components/AboutView";
 import { Footer } from "./components/Footer";
 import { Toaster } from "./components/ui/sonner";
@@ -12,6 +13,7 @@ import { Toaster } from "./components/ui/sonner";
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [selectedApp, setSelectedApp] = useState<AppData | null>(null);
+  const [selectedBlog, setSelectedBlog] = useState<BlogData | null>(null);
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page);
@@ -56,13 +58,24 @@ export default function App() {
     setSelectedApp(null);
   };
 
+  const handleBlogSelect = (blog: BlogData) => {
+    setSelectedBlog(blog);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleBackToBlog = () => {
+    setSelectedBlog(null);
+  };
+
   return (
-    <div className="dark min-h-screen bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground flex flex-col">
-      {!selectedApp && <Navbar currentPage={currentPage} onNavigate={handleNavigate} />}
+    <div className="dark min-h-screen bg-black text-white font-sans selection:bg-white selection:text-black flex flex-col">
+      {!selectedApp && !selectedBlog && <Navbar currentPage={currentPage} onNavigate={handleNavigate} />}
 
       <main className="flex-1">
         {selectedApp ? (
           <AppDetailView app={selectedApp} onBack={handleBackToApps} />
+        ) : selectedBlog ? (
+          <BlogDetailView blog={selectedBlog} onBack={handleBackToBlog} />
         ) : currentPage === "about" ? (
           <AboutView />
         ) : (
@@ -70,12 +83,12 @@ export default function App() {
             <Hero onNavigate={handleNavigate} />
             <AppShowcase onAppSelect={handleAppSelect} />
             <RequestForm />
-            <BlogSection />
+            <BlogSection onBlogSelect={handleBlogSelect} />
           </>
         )}
       </main>
 
-      {!selectedApp && <Footer />}
+      {!selectedApp && !selectedBlog && <Footer />}
       <Toaster />
     </div>
   );
