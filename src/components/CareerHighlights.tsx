@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, GraduationCap, Users } from "lucide-react";
+import { Briefcase, GraduationCap, Users, Star } from "lucide-react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { AppData } from "./AppDetailView";
 import { useIsMobile } from "../hooks/useIsMobile";
@@ -11,12 +13,19 @@ interface CareerHighlightsProps {
   onAppSelect?: (app: AppData) => void;
 }
 
+type Category = "All" | "Career" | "Learning" | "Client" | "In-Dev";
+
 export function CareerHighlights({ apps, onAppSelect }: CareerHighlightsProps) {
   const isMobile = useIsMobile();
+  const [selectedCategory, setSelectedCategory] = useState<Category>("All");
 
-  const careerApps = apps.filter(app =>
-    app.category === "Career" || app.category === "Learning" || app.category === "Client"
-  );
+  const categories: Category[] = ["All", "Career", "Learning", "Client", "In-Dev"];
+
+  const filteredApps = selectedCategory === "All"
+    ? apps
+    : selectedCategory === "In-Dev"
+    ? apps.filter(app => app.status === "in-dev")
+    : apps.filter(app => app.category === selectedCategory);
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
@@ -38,22 +47,37 @@ export function CareerHighlights({ apps, onAppSelect }: CareerHighlightsProps) {
   };
 
   return (
-    <section className="py-12 md:py-20 bg-neutral-950 relative overflow-hidden" id="career">
+    <section className="py-12 md:py-20 bg-neutral-950 relative overflow-hidden" id="apps">
       <div className="container mx-auto px-4 relative">
         <motion.div
           {...motionProps}
-          className="text-center mb-8 md:mb-12"
+          className="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12 gap-4 md:gap-6"
         >
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-2 text-white">
-            Career Highlights
-          </h2>
-          <p className="text-neutral-400 text-sm md:text-lg">
-            Professional projects, learning experiences, and client work
-          </p>
+          <div className="text-center md:text-left w-full md:w-auto">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-2 text-white">
+              All Apps
+            </h2>
+            <p className="text-neutral-400 text-sm md:text-lg">
+              Explore my portfolio of applications
+            </p>
+          </div>
+
+          <div className="flex gap-2 flex-wrap justify-center w-full md:w-auto">
+            {categories.map((cat) => (
+              <Button
+                key={cat}
+                variant={selectedCategory === cat ? "default" : "outline"}
+                onClick={() => setSelectedCategory(cat)}
+                className="rounded-full whitespace-nowrap transition-all hover:scale-105 text-xs md:text-sm px-3 md:px-4 py-1.5 md:py-2"
+              >
+                {cat}
+              </Button>
+            ))}
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {careerApps.map((app, index) => {
+          {filteredApps.map((app, index) => {
             const cardMotionProps = isMobile ? {} : {
               initial: { opacity: 0, y: 20 },
               whileInView: { opacity: 1, y: 0 },
@@ -78,7 +102,7 @@ export function CareerHighlights({ apps, onAppSelect }: CareerHighlightsProps) {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="flex items-center gap-2 mb-2 flex-wrap">
                         <Badge
                           variant="secondary"
                           className="text-xs bg-neutral-800 text-neutral-300 border-neutral-700 rounded-full flex items-center gap-1"
@@ -91,14 +115,35 @@ export function CareerHighlights({ apps, onAppSelect }: CareerHighlightsProps) {
                             In Dev
                           </Badge>
                         )}
+                        {app.status === "live" && (
+                          <Badge variant="secondary" className="text-xs bg-green-600/20 text-green-400 border-green-600/30 rounded-full">
+                            Live
+                          </Badge>
+                        )}
                       </div>
 
                       <h3 className="font-bold text-lg mb-1 text-white group-hover:text-neutral-300 transition-colors line-clamp-1">
                         {app.title}
                       </h3>
-                      <p className="text-sm text-neutral-400 line-clamp-2">
+                      <p className="text-sm text-neutral-400 line-clamp-2 mb-2">
                         {app.description}
                       </p>
+
+                      {app.status === "live" && (
+                        <div className="flex items-center gap-4 text-xs text-neutral-400">
+                          <div className="flex items-center gap-1">
+                            <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                            <span className="text-white font-semibold">{app.rating}</span>
+                          </div>
+                          <span>•</span>
+                          <span>{app.downloads}</span>
+                        </div>
+                      )}
+                      {app.status === "in-dev" && app.developmentProgress !== undefined && (
+                        <div className="text-xs text-neutral-400">
+                          {app.developmentProgress}% Complete
+                        </div>
+                      )}
                     </div>
                   </div>
                 </Card>

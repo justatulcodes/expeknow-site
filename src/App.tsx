@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
-import { AppShowcase } from "./components/AppShowcase";
 import { AppDetailView, AppData } from "./components/AppDetailView";
 import { RequestForm } from "./components/RequestForm";
 import { BlogSection } from "./components/BlogSection";
@@ -111,9 +110,8 @@ export default function App() {
             <Hero onNavigate={handleNavigate} />
             <ForYouSection apps={APPS} onAppSelect={handleAppSelect} />
             <CareerHighlights apps={APPS} onAppSelect={handleAppSelect} />
-            <AppShowcase onAppSelect={handleAppSelect} />
-            <RequestForm />
             <BlogSection onBlogSelect={handleBlogSelect} onViewAll={handleViewAllBlogs} />
+            <RequestForm />
           </>
         )}
       </main>
