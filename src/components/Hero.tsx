@@ -39,17 +39,26 @@ export function Hero({ onNavigate }: HeroProps) {
               </Button>
             </div>
 
-            <div className="flex gap-4 pt-4 text-sm text-neutral-400 items-center">
-              <a href="#" className="flex items-center gap-2 hover:text-white transition-colors">
-                <FileText className="h-4 w-4" /> Resume
+            <div className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4 pt-2 md:pt-4 text-xs md:text-sm items-center">
+              <a href="#" className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors group">
+                <div className="h-5 w-5 flex items-center justify-center rounded bg-neutral-800 group-hover:bg-neutral-700 transition-colors">
+                  <FileText className="h-3 w-3 text-white" />
+                </div>
+                <span>Resume</span>
               </a>
               <div className="h-4 w-px bg-neutral-800" />
-              <a href="#" className="flex items-center gap-2 hover:text-white transition-colors">
-                <Github className="h-4 w-4" /> Github
+              <a href="#" className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors group">
+                <div className="h-5 w-5 flex items-center justify-center rounded-full bg-[#181717] group-hover:bg-[#24292e] transition-colors">
+                  <Github className="h-3 w-3 text-white" />
+                </div>
+                <span>Github</span>
               </a>
               <div className="h-4 w-px bg-neutral-800" />
-              <a href="#" className="flex items-center gap-2 hover:text-white transition-colors">
-                <Linkedin className="h-4 w-4" /> LinkedIn
+              <a href="#" className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors group">
+                <div className="h-5 w-5 flex items-center justify-center rounded bg-[#0A66C2] group-hover:bg-[#004182] transition-colors">
+                  <Linkedin className="h-3 w-3 text-white" />
+                </div>
+                <span>LinkedIn</span>
               </a>
             </div>
           </motion.div>

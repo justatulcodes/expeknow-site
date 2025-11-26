@@ -8,7 +8,7 @@ import { AppData } from "./AppDetailView";
 
 type Category = "All" | "Learning" | "Career" | "Client" | "In-Dev";
 
-const APPS: AppData[] = [
+export const APPS: AppData[] = [
   {
     id: "1",
     title: "TaskMaster Pro",
@@ -183,5 +183,3 @@ export function AppShowcase({ onAppSelect }: AppShowcaseProps) {
     </section>
   );
 }
-
-export { APPS };

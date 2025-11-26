@@ -2,9 +2,11 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Download, Github, Star, Bell, ExternalLink } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { Progress } from "./ui/progress";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { toast } from "sonner";
+import { DevelopmentProgressBar } from "./DevelopmentProgressBar";
+import { APPS } from "./AppShowcase";
+import { Card } from "./ui/card";
 
 export interface AppData {
   id: string;
@@ -27,9 +29,10 @@ export interface AppData {
 interface AppDetailViewProps {
   app: AppData;
   onBack: () => void;
+  onAppSelect?: (app: AppData) => void;
 }
 
-export function AppDetailView({ app, onBack }: AppDetailViewProps) {
+export function AppDetailView({ app, onBack, onAppSelect }: AppDetailViewProps) {
   const handleNotify = () => {
     toast.success("You're on the list! We'll notify you when it launches.");
   };
@@ -147,16 +150,10 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
             className="lg:col-span-2 space-y-8"
           >
             {app.status === "in-dev" && app.developmentProgress !== undefined && (
-              <div className="bg-neutral-900/50 rounded-2xl p-6 border border-neutral-800 animate-slide-up">
-                <h3 className="text-xl font-semibold mb-4 text-white">Development Progress</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-neutral-400">Current Phase: {app.developmentPhase}</span>
-                    <span className="font-semibold text-white">{app.developmentProgress}%</span>
-                  </div>
-                  <Progress value={app.developmentProgress} className="h-3" />
-                </div>
-              </div>
+              <DevelopmentProgressBar
+                progress={app.developmentProgress}
+                currentPhase={app.developmentPhase || "Development"}
+              />
             )}
 
             <div className="bg-neutral-900/50 rounded-2xl p-6 border border-neutral-800">
@@ -256,6 +253,54 @@ export function AppDetailView({ app, onBack }: AppDetailViewProps) {
             )}
           </motion.div>
         </div>
+
+        {/* Related Apps Section */}
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="mt-12 pt-12 border-t border-neutral-800"
+        >
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-6 text-white">Other Apps</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {APPS.filter(a => a.id !== app.id).slice(0, 3).map((relatedApp) => (
+              <Card
+                key={relatedApp.id}
+                onClick={() => onAppSelect?.(relatedApp)}
+                className="group cursor-pointer bg-neutral-900/50 backdrop-blur rounded-2xl border border-neutral-800 hover:shadow-xl hover:border-neutral-700 transition-all duration-300 overflow-hidden hover:-translate-y-2"
+              >
+                <div className="flex p-5 gap-4 items-start">
+                  <div className="relative h-16 w-16 rounded-xl overflow-hidden bg-neutral-800 shrink-0">
+                    <ImageWithFallback
+                      src={relatedApp.image}
+                      alt={relatedApp.title}
+                      className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-base mb-1 text-white group-hover:text-neutral-300 transition-colors line-clamp-1">
+                      {relatedApp.title}
+                    </h3>
+                    <p className="text-xs text-neutral-400 line-clamp-2 mb-2">
+                      {relatedApp.description}
+                    </p>
+                    {relatedApp.status === "live" && (
+                      <div className="flex items-center gap-2 text-xs">
+                        <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                        <span className="text-white font-semibold">{relatedApp.rating}</span>
+                      </div>
+                    )}
+                    {relatedApp.status === "in-dev" && (
+                      <Badge variant="secondary" className="text-xs bg-blue-600/20 text-blue-400 border-blue-600/30 rounded-full">
+                        In Dev
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </motion.div>
   );

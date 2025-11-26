@@ -10,6 +10,9 @@ import { AllBlogsView } from "./components/AllBlogsView";
 import { AboutView } from "./components/AboutView";
 import { Footer } from "./components/Footer";
 import { Toaster } from "./components/ui/sonner";
+import { ForYouSection } from "./components/ForYouSection";
+import { CareerHighlights } from "./components/CareerHighlights";
+import { APPS } from "./components/AppShowcase";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -58,6 +61,10 @@ export default function App() {
 
   const handleBackToApps = () => {
     setSelectedApp(null);
+    setCurrentPage("home");
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
   };
 
   const handleBlogSelect = (blog: BlogData) => {
@@ -67,6 +74,10 @@ export default function App() {
 
   const handleBackToBlog = () => {
     setSelectedBlog(null);
+    setCurrentPage("home");
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
   };
 
   const handleViewAllBlogs = () => {
@@ -76,6 +87,10 @@ export default function App() {
 
   const handleBackFromAllBlogs = () => {
     setShowAllBlogs(false);
+    setCurrentPage("home");
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
   };
 
   return (
@@ -84,9 +99,9 @@ export default function App() {
 
       <main className="flex-1">
         {selectedApp ? (
-          <AppDetailView app={selectedApp} onBack={handleBackToApps} />
+          <AppDetailView app={selectedApp} onBack={handleBackToApps} onAppSelect={handleAppSelect} />
         ) : selectedBlog ? (
-          <BlogDetailView blog={selectedBlog} onBack={handleBackToBlog} />
+          <BlogDetailView blog={selectedBlog} onBack={handleBackToBlog} onBlogSelect={handleBlogSelect} />
         ) : showAllBlogs ? (
           <AllBlogsView onBack={handleBackFromAllBlogs} onBlogSelect={handleBlogSelect} />
         ) : currentPage === "about" ? (
@@ -94,6 +109,8 @@ export default function App() {
         ) : (
           <>
             <Hero onNavigate={handleNavigate} />
+            <ForYouSection apps={APPS} onAppSelect={handleAppSelect} />
+            <CareerHighlights apps={APPS} onAppSelect={handleAppSelect} />
             <AppShowcase onAppSelect={handleAppSelect} />
             <RequestForm />
             <BlogSection onBlogSelect={handleBlogSelect} onViewAll={handleViewAllBlogs} />

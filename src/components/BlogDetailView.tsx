@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Clock, Calendar, Share2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
+import { BlogFooter } from "./BlogFooter";
 
 export interface BlogData {
   id: number;
@@ -18,9 +19,10 @@ export interface BlogData {
 interface BlogDetailViewProps {
   blog: BlogData;
   onBack: () => void;
+  onBlogSelect?: (blog: BlogData) => void;
 }
 
-export function BlogDetailView({ blog, onBack }: BlogDetailViewProps) {
+export function BlogDetailView({ blog, onBack, onBlogSelect }: BlogDetailViewProps) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -96,6 +98,10 @@ export function BlogDetailView({ blog, onBack }: BlogDetailViewProps) {
               ))}
             </div>
           </div>
+
+          {onBlogSelect && (
+            <BlogFooter currentBlogId={blog.id} onBlogSelect={onBlogSelect} />
+          )}
         </motion.article>
       </div>
     </motion.div>

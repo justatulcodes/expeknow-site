@@ -78,24 +78,10 @@ export function RequestForm() {
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white relative z-10">
                 Have a Crazy Idea?
               </h2>
-              <p className="text-neutral-400 text-lg leading-relaxed">
+              <p className="text-neutral-400 text-sm md:text-lg leading-relaxed relative z-10">
                 I'm always looking for interesting projects to work on. Share your wildest app idea,
                 and if it catches my attention, I might just bring it to life.
               </p>
-              <div className="space-y-3 pt-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-                  <p className="text-neutral-400">Innovative concepts welcome</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-                  <p className="text-neutral-400">Quick turnaround on feedback</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-                  <p className="text-neutral-400">Collaborative development process</p>
-                </div>
-              </div>
             </div>
           </motion.div>
 
