@@ -111,7 +111,7 @@ export function AppShowcase({ onAppSelect }: AppShowcaseProps) {
           className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6"
         >
           <div className="relative">
-            <div className="absolute -left-32 md:-left-48 -top-12 w-[600px] h-[600px] opacity-[0.08] pointer-events-none">
+            <div className="absolute -left-32 md:-left-48 -top-12 w-[600px] h-[600px] opacity-[0.2] pointer-events-none">
               <Smartphone className="w-full h-full text-white" strokeWidth={4} />
             </div>
             <h2 className="text-4xl font-bold tracking-tight mb-2 text-white relative z-10">Featured Apps</h2>
