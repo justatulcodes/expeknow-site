@@ -10,7 +10,7 @@ interface HeroProps {
 
 export function Hero({ onNavigate }: HeroProps) {
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden bg-black">
+    <section className="relative py-12 md:py-32 overflow-hidden bg-black">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -74,7 +74,6 @@ export function Hero({ onNavigate }: HeroProps) {
               alt="Developer Portrait"
               className="object-cover w-full h-full"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent md:hidden" />
           </motion.div>
         </div>
       </div>
